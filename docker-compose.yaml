@@ -6,13 +6,19 @@ networks:
 
 services:
   mongodb:
-    image: mongodb:v1
+    build:
+      context: ./mongodb
+      dockerfile: Dockerfile
+    image: aravind527/mongodb:v1
     container_name: mongodb
     volumes:
       - mongodb:/data/db
 
   catalogue:
-    image: catalogue:v1
+    build:
+      context: ./catalogue
+      dockerfile: Dockerfile
+    image: aravind527/catalogue:v1
     container_name: catalogue
     depends_on:
     - mongodb
@@ -24,6 +30,9 @@ services:
     - redis:/data
 
   mysql:
+    build:
+      context: ./mysql
+      dockerfile: Dockerfile
     image: mysql:v1
     container_name: mysql
     volumes:
@@ -39,28 +48,40 @@ services:
       RABBITMQ_DEFAULT_PASS: roboshop123
 
   user:
-    image: user:v1
+    build:
+      context: ./user
+      dockerfile: Dockerfile
+    image: aravind527/user:v1
     container_name: user
     depends_on:
     - mongodb
     - redis
 
   cart:
-    image: cart:v1
+    build:
+      context: ./cart
+      dockerfile: Dockerfile
+    image: aravind527/cart:v1
     container_name: cart
     depends_on:
     - redis
     - catalogue
 
   shipping:
-    image: shipping:v1
+    build:
+      context: ./shipping
+      dockerfile: Dockerfile
+    image: aravind527/shipping:v1
     container_name: shipping
     depends_on:
     - mysql
     - cart
 
   payment:
-    image: payment:v1
+    build:
+      context: ./payment
+      dockerfile: Dockerfile
+    image: aravind527/payment:v1
     container_name: payment
     depends_on:
     - rabbitmq
@@ -68,7 +89,10 @@ services:
     - cart
 
   frontend:
-    image: frontend:v1
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: aravind527/frontend:v1
     container_name: frontend
     ports:
     - "80:80"
