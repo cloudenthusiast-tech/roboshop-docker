@@ -24,7 +24,7 @@ services:
     - mongodb
   
   redis:
-    image: redis:v1
+    image: aravind527/redis:v1
     container_name: redis
     volumes:
     - redis:/data
@@ -33,13 +33,13 @@ services:
     build:
       context: ./mysql
       dockerfile: Dockerfile
-    image: mysql:v1
+    image: aravind527/mysql:v1
     container_name: mysql
     volumes:
     - mysql:/var/lib/mysql
 
   rabbitmq:
-    image: rabbitmq:3
+    image: aravind527/rabbitmq:3
     container_name: rabbitmq
     volumes:
     - rabbitmq:/var/lib/rabbitmq
