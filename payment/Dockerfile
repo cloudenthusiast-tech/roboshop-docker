@@ -5,7 +5,7 @@ RUN apk add --no-cache \
     linux-headers \
     pcre-dev
 # using --prefix=/install for better management of dependencies 
-RUN pip3 install --prefix=/install-r requirements.txt
+RUN pip3 install --prefix=/install -r requirements.txt
 
 FROM python:3.9.25-alpine3.21 
 EXPOSE 8080
